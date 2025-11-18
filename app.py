@@ -1,17 +1,22 @@
-import streamlit as st
-import mysql.connector
-import pandas as pd
+
+from dotenv import load_dotenv
 from datetime import datetime, date
+import os
+
 
 
 # ---------------- DATABASE CONNECTION ----------------
+
+load_dotenv()
+
 def get_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="vishnu2014",  # Change to your password
-        database="newham_project"
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME")
     )
+
 
 # Generate ClientCode: DOMUS<YEAR><SEQ>
 def generate_client_code():
